@@ -1,0 +1,26 @@
+\begin{thebibliography}{1}
+
+\bibitem{koopman97a}
+Koopman, P.:
+\newblock How to write an abstract.
+\newblock Technical report, Carnegie Mellon University (October 1997)
+  \hfill\break http://www.ece.cmu.edu/$\sim$koopman/essays/abstract.html.
+
+\bibitem{enum1}
+{Python Software Foundation}:
+\newblock {Enumerate} (2019)
+  \url{https://docs.python.org/3/library/functions.html?highlight=enumerate#enumerate}.
+
+\bibitem{pack}
+{GeeksForGeeks}:
+\newblock {Packing and Unpacking} (2019)
+  \url{https://www.geeksforgeeks.org/packing-and-unpacking-arguments-in-python/}.
+
+\bibitem{pierce2010software}
+Pierce, B.C., Casinghino, C., Gaboardi, M., Greenberg, M., Hri{\c{t}}cu, C.,
+  Sjoberg, V., Yorgey, B.:
+\newblock Software foundations.
+\newblock Webpage: http://www. cis. upenn. edu/bcpierce/sf/current/index. html
+  (2010)
+
+\end{thebibliography}
