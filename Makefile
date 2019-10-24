@@ -11,4 +11,4 @@ all:
 	$(LATEX) $(NAME).tex
 
 clean:
-	rm -f *.bbl *.blg *.aux *.log *.dvi *~
+	rm -f *.bbl *.blg *.pdf *.aux *.log *.dvi *~
