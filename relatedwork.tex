@@ -1,14 +1,5 @@
 \section{Related Work}
 \label{sec:relatedwork}
-
-In this section, I will discuss related ideas that 
-are most similar to mine. If the topic of my work 
-has many recent related publications, I will categorize
-these and present each category in a separate section.
-
-For each related idea (or category) I will present a 
-discussion in the following form: (a) what is the idea
-(in brief)?, (b) what is nice/novel about this 
-idea (category of ideas)?, and (c) what are the problems
-with this idea? or if there are no problems, how is 
-my approach better compared to this idea?
+\paragraph{\textbf{Study on accountability of ML model.}}
+There is a vast amount of research on validating and holding an ML model. One of the earliest validation technique proposed by Pulina and Tacchella \cite{pulina2010abstraction} that utilizes abstraction to explain special types of a neural network, multi-layer perceptrons (MLP) and proposed a refinement approach to study the safety of MLP and repair them. However, this work can only be utilized if a network has six neurons. Gehr et al. \cite{gehr2018ai2} has proposed an infrastructure $AI^{2}$ that converts a neural network with convolution and fully connected layers to address the safety and robustness of the ML models. This work has address some issue e.g., the trade-off between precision and scalability, presenting an abstract representation of robustness in convolutional operation. However, this infrastructure does not work for a complex model and it suffers from scalability issues. RELUVAL \cite{wang2018formal} proposed a symbolic interval analysis to provide a formal guarantee of a deep neural network-based model. This work has proposed a technique to formalize the dependency information of a network while the network operations propagate. Input dependency and output estimation related problems are addressed by providing an interval that is similar to our work where we demonstrate the output accuracy in terms of an interval based on the input dependencies propagating through the network. Similar to the RELUVAL, \cite{katz2017reluplex} built a framework based on SMT solver to verify neural networks. \cite{jia2019taso} proposed a programming language to prune the neural network to explain and interpret the model behavior and find bugs in the graph-based operations. \cite{du2018techniques} has surveyed models and research papers and have found that though there are a vast majority of work in machine learning has been done on increasing the explainability of the models, these researches do not answer some question developers have e.g., \emph{"why Q, not R"} or in our case why the accuracy changes with the same experimental condition and how we can believe an ML model if it simply does not provide a contract to the end-user.
+\paragraph{\textbf{Accuracy validation}}
