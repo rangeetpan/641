@@ -1,10 +1,5 @@
 \section{Background}
 \label{sec:background}
-
-In this section, I will present necessary background.
-The objective of presenting the background here is to 
-make the paper self-contained. 
-After reading this section, even those readers who may
-not be initially familar with the underlying ideas 
-behind my technique will be able to understand the rest
-of the paper. 
+In this section, we have discussed the traditional operations carried out in validating the accountability for a DNN model.
+\paragraph{Forward Propagation.} In this stage, a DNN model learns the features from the input. This stage includes, the random initialization, activation functions, feed forward, and loss function. Deep neural network can be represented as a fully connected graph as depicted in the Figure \ref{fig:rq5}. These graph consists of nodes and edges. There are value associated with the nodes and edge, these values are initally randomly initialized to start the training process. This step is very important as a wrong initalization parameter can hamper the learning process and take longer iteration to reach optimality. Also, it is never a good idea to initalize them with zero as in the consequetive steps, the gradient will be computed as zero and this will end up not learning anything from the input. The activation function has impact on the computation, however, it does not change the probability distribution of the computation. The main purpose of activation function is to convert the representation of the value corresponds to the nodes according to the need. Whereas the loss function computes the difference between the expected and the actual result.
+\paragraph{Backward Propagation.} This is similar to the 
