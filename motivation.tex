@@ -1,14 +1,14 @@
 \section{Motivation}
 \label{sec:motivation}
 
-Let us consider the following motivating example in Figure \ref{fig:motiv} where different classification accuracy has been obtained every time machine learning model has been trained on the same dataset  \footnote{\small \url{https://stackoverflow.com/questions/55775450/}}. 
+In Figure \ref{fig:motiv}, we illustrate an example from the Stack Overflow  \footnote{\small \url{https://stackoverflow.com/questions/55775450/}}. In this scenario, different classification accuracy has been obtained with every execution of a machine learning model that has been trained on the same dataset. 
 \begin{figure}[h]
 	\includegraphics[width=\linewidth]{motivfigure.pdf}
 	\caption{Motivating example of accountable assertion to interpret accuracy for accountable machine learning classifier}
 	\label{fig:motiv}
 	%\vspace{15pt}
 \end{figure}
-Here, three different classifiers e.g., k-nearest neighbors (k=1,3,5,7,9,11,13), Naive Bayes and Logistic Regression have been implemented on the same dataset using the same features extractor for comparing the accuracies to determine which classifier is better on the dataset. However, every time these models have been trained i.e., the whole code has been re-executed on the same dataset, different values of accuracy for each model has been obtained as illustrated in the Figure \ref{fig:motiv}. In this case, how we can interpret the accuracy or how the classifier can be accountable in terms of definite accuracy for each model? That is why we are motivated to propose an accountable assertion to interpret accuracy for accountable machine learning classifier.  
+Three different classifiers e.g., k-nearest neighbors (k=1,3,5,7,9,11,13), Naive Bayes, and Logistic Regression have been compared using the accuracy of each model. With every execution, these models have been trained with the same experimental setup, different values of accuracy for each model have been obtained as illustrated in Figure \ref{fig:motiv}. These results in a lack of trustworthiness of an ML-based model. The obvious question would be how we can interpret the accuracy or how the classifier can become accountable with the evaluation metric? This problem motivates us to propose a mining and specification-based language to hold an ML model accountable.  
 
 %\small
 %\begin{lstlisting}[language=Python, caption=Motivating example of model verification to interpret accuracy for accountable ML]
