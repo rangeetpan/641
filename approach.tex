@@ -5,6 +5,37 @@ In this section, we have proposed a comprehensive approach to address the discus
 f(\sum_{\chi}{W_iX_i+B}), \chi\sim D(\mu, \sigma^2)
 \end{equation}
 In the equation above, the traditional dense operation has been depicted as an example, where, $W_i$, $X_i$, $B_i$, $f()$, and $D$ represents the weight, input, bias, the activation function, and a unknown distribution of the operations respectively that require random initialization. The output of this learning process will be an interval of value rather than a single concrete value. In Figure \ref{fig:rq5}, we have depicted a similar scenario that includes the learning of the distribution, which results in an interval reported as "[Low, High]". The interval is similar to any algorithmic evaluation with the best-case and worst-case scenario. 
+Our methodology has been discuss as follows,
+\paragraph{\textbf{Mining Randomly Initialized Parameter:}}
+In this phase, we have to understand the parameters that are subject to the random initialization. For this study, we have already mentioned that our focus has been on the deep learning-based image classifiers. To do so, we have mined the \emph{Keras} documentation to understand the implementation of DNN API. In this process, 3 Ph.D. students have individually gone through the implementation of all the functions. Our goal is two-fold here, 1) Identify the places, where random initialization has taken place that describe the learning-based system, 2) If we can mine the type of distribution from the implementation, then we can understand how the values correspond to that particular parameter has propagated to the output metrics. Our mining technique has identified a class of operation in \emph{Keras} that is responsible for initializing the parameters, called \emph{Initializers.} 
+\begin{lstlisting}
+model.add(Dense(64,
+kernel_initializer='random_uniform',
+bias_initializer='zeros'))
+\end{lstlisting}
+The above example of the \emph{initializer} operation in \emph{Keras} can initialize two parameters in the learning process, weight, and bias. The \emph{kernel\_initializer} is responsible for the weight value initialization, while \emph{bias\_initializer} is for bias value corresponds to that particular layer. This serves the purpose of finding the parameters that cause the value of the output to be variant with every execution. 
+
+To identify the distribution of these parameters, we have validated the implementation of the \emph{initializer} class and have found that are a few different distributions that it supports and if not specifically given, which default distribution has been taken care of.
+\begin{itemize}
+	\item Zeros: This initializes the parameter with 0. While, it may not be an issue for the bias, but if it has been initialized for weight, during the backpropagation, the derivative of the actual and computed value will be 1 for all cases that would make the learning process very hard to compensate the huge loss.
+	\item Ones: This initializes the parameter with 1.
+	\item Constant: Initializing with a constant is depended on the users' choice of the value.
+	\item Normal Distribution: The parameter will be initialized with a normal distribution that takes input as mean ($\mu$) and the standard distribution ($\sigma$) to describe the distribution.
+	\item Uniform distribution
+	\item Truncated Normal Distribution
+	\item LeCun uniform initializer.
+	\item Glorot normal initializer
+	\item Glorot uniform initializer
+	\begin{lstlisting}
+	class Dense(Layer):
+	def __init__(self, units,
+	kernel_initializer='glorot_uniform',
+	bias_initializer='zeros',
+	....
+	**kwargs):\end{lstlisting}
+	\item LeCun normal initializer.
+\end{itemize}
+
 The contribution of this proposed approach in programming language and accountability has been described as follows.
 \paragraph{\textbf{Accountability.}} According to the study \cite{veale2018fairness}, accountability in decision making represents the explanation about the "ongoing strategy". From the \S\ref{sec:motivation}, we have found that a single model structure can provide different decision-making capabilities due to the assertion of the probabilistic distribution in the initialization process. The prior work \cite{sampson2014expressing} has already demostrated that assertion based specification language can achieve accountability by reasoning about programs that behave randomly. In our proposed approach, we learn the unknown distribution of the initialization parameter. Then, we interpret the learning process by providing an interval of output metric rather than a single value that changes with every iteration of the learning process. This approach will help the end-users to hold a model accountable in terms of the contract made between the model structure and the predicted output.
 \paragraph{\textbf{Programming Language.}} This approach includes the validation framework from the learned distribution. We have proposed an assertion mechanism that verify the operation of the distribution and the input to restrict the learning process to go beyond the desired interval of output metrics. We propose \emph{ADNN}, a specification language that restricts a learning process from a pair $(f,\nu)$, where $f$ and $\nu$ denotes the learning process and the specification provided by the user. An example of the programming language is depicted as below.
