@@ -1,12 +1,5 @@
 \section{Approach}
 \label{sec:approach}
-\begin{figure}
-	\includegraphics[width=0.85\linewidth]{approach}
-	\centering
-	\caption{Overview of the proposed approach}
-	\label{fig:flow}
-	%\vspace{15pt}
-\end{figure}
 In this section, we have proposed a comprehensive approach to address the discussed problem. 
 %In our approach, at first we have proposed a validation technique and utilized that to achieve accountability of a DNN model.
 In the \S\ref{sec:background}, we have discussed the forward and backward propagation. In the two-step learning process, random initialization plays a crucial role in model validation. 
@@ -18,10 +11,17 @@ In Figure \ref{fig:flow}, we have depicted the overview of the proposed approach
 %\end{equation}
 %In the equation above, the traditional dense operation has been depicted as an example, where, $W_i$, $X_i$, $B_i$, $f()$, and $D$ represents the weight, input, bias, the activation function, and a unknown distribution of the operations respectively that require random initialization. The output of this learning process will be an interval of value rather than a single concrete value. In Figure \ref{fig:rq5}, we have depicted a similar scenario that includes the learning of the distribution, which results in an interval reported as "[Low, High]". The interval is similar to any algorithmic evaluation with the best-case and worst-case scenario. 
 %In the diagram \fignref{fig:flow}, 
-Our methodology has been discussed as follows,
+Our methodology has been discussed as follows.
+\begin{figure}
+	\includegraphics[width=0.85\linewidth]{approach}
+	\centering
+	\caption{Overview of the proposed approach}
+	\label{fig:flow}
+	\vspace{15pt}
+\end{figure}
 \subsection{Optimized Loss Function}
 \subsubsection{5.1.1~~Identifying Randomly Initialized Parameter.}
-In this phase, we have to understand the parameters that are subject to the random initialization. For this study, we have already mentioned that our focus has been on the deep learning-based image classifiers. To do so, we have mined the \emph{Keras} documentation to understand the implementation of DNN API. In this process, 3 Ph.D. students have individually gone through the implementation of all the functions. Our goal is two-fold here, 1) Identify the places, where random initialization has taken place that describe the learning-based system, 2) If we can mine the type of distribution from the implementation, then we can understand how the values correspond to that particular parameter has propagated to the output metrics. Our mining technique has identified a class of operation in \emph{Keras} that is responsible for initializing the parameters, called \emph{Initializers.} 
+In this phase, we have to understand the parameters that are subject to the random initialization. For this study, we have already mentioned that our focus has been on the deep learning-based image classifiers. To do so, we have mined the \emph{Keras} \cite{chollet2015keras} documentation to understand the implementation of DNN API. In this process, 3 Ph.D. students have individually gone through the implementation of all the functions. Our goal is two-fold here, 1) Identify the places, where random initialization has taken place that describe the learning-based system, 2) If we can mine the type of distribution from the implementation, then we can understand how the values correspond to that particular parameter has propagated to the output metrics. Our mining technique has identified a class of operation in \emph{Keras} that is responsible for initializing the parameters, called \emph{Initializers.} 
 \begin{lstlisting}[language=Python, caption=Example of initialization parameters in Keras]
 model.add(Dense(64,
 kernel_initializer='random_uniform',
@@ -39,15 +39,15 @@ To identify the distribution of these parameters, we have validated the implemen
 	\item Truncated Normal Distribution: The parameter is initialized with a truncated normal distribution where values greater than 2 standard deviations from mean are omitted. Here, the mean and standard deviation of the random values are used as arguments.
 	\item LeCun uniform initializer: This initializes parameter using a uniform distribution where input unit numbers are specified as the limit for drawing samples from it.
 	\item Glorot normal initializer: In this initializer, truncated normal distribution using the number of input and output units are used for drawing samples. 
-	\item Glorot uniform initializer: This initializes parameter using a uniform distribution where input unit numbers along with the output unit numbers are specified as the limit for drawing samples from it. \\
-	We can observe how kernel and bias initializers are initialized from the following example,
-	\begin{lstlisting}[language=Python, caption=Example of Keras's default setup]
+		\begin{lstlisting}[language=Python, caption=Example of Keras's default setup]
 	class Dense(Layer):
 	def __init__(self, units,
 	kernel_initializer='glorot_uniform',
 	bias_initializer='zeros',
 	....
 	**kwargs):\end{lstlisting}
+	\item Glorot uniform initializer: This initializes parameter using a uniform distribution where input unit numbers along with the output unit numbers are specified as the limit for drawing samples from it. \\
+	We can observe how kernel and bias initializers are initialized from the following example,
 	\item LeCun normal initializer: In this initializer, truncated normal distribution using the number of input units are used for drawing samples.
 \end{itemize}
 \subsubsection{5.1.2~~Finding optimized initial Weight and Bias}
@@ -88,7 +88,7 @@ To identify the distribution of these parameters, we have validated the implemen
 From the \emph{Keras} documentation, we have found that weight and bias parameters are responsible for the change of the output metric in a DNN model. These two parameters are randomly initialized from the user-provided distribution or with the default one. Thus, our goal in this study is to find the value of the bias and weight s.t. the accuracy will be the highest or the loss value will be the least. This is a linear optimization problem, which is solvable in exponential time, but the nearest optimum solution can be achieved in polynomial time. Therefore, we have used an adaptive simulated annealing \cite{ingber2000adaptive} to find the optimized value of the weight and bias combination that leads to better accuracy. 
 In the Algo. \ref{algo:asa}, we have initialized the starting point of the weight and bias to be zero and then we increase the value of the weight and bias initializing value with the step size parameter $\delta$. For each instance, we compute the loss value $L(W, B)$, where $W$ and $B$ represent the initial chosen value of weight and bias. As our goal is to minimize the $L(W, B)$, we run the process until we get a better value. If we get a better result, we validate that the value of the weight and bias do not represent a local minima in the search space, thereupon, we compute a probability value $P$ and a random value in the range $[0,1]$ and similar to the simulated annealing process, we compute the process again the probability is greater than random value. Similarly, we find the value of the weight and bias that provides the near-optimum loss value and with that, we compute the accuracy as $1-L(W, B)$ as in our study, we use the probability as the output metric and $1-loss$ represents the accuracy of the model. In this proposed approach, we start the step size parameter with a constant $C$ that we compute using an empirical evaluation and fix that for a genre of problems.
 \subsection{Assertion of DNN Accuracy}
-This approach includes the validation framework from the learned distribution. We have proposed an assertion mechanism that verify the operation of the distribution and the input to restrict the learning process to go beyond the desired interval of output metrics. We propose \emph{ADNN}, a specification language that restricts a learning process from a pair $(f,\nu)$, where $f$ and $\nu$ denotes the learning process and the specification provided by the user. An example of the programming language is depicted as below.
+This approach includes the validation framework from the learned distribution. We have proposed an assertion mechanism that verify that whether a DNN model can achieve the expected accuracy or not. We propose \emph{ADNN}, a specification language that restricts the learning process from a pair $(f,\nu)$, where $f$ and $\nu$ denotes the learning process and the specification provided by the user. An example of the programming language is depicted as below.
 \begin{lstlisting}[language=Python, caption=Example of specification language]
 @adnn(0.95>accuracy>0.65)
 f(input_image, ....)
