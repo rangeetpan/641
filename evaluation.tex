@@ -1,23 +1,54 @@
 \section{Evaluation}
 \label{sec:evaluation}
-
-
+\subsection{Experimental Setup}
+\subsubsection{\textbf{Model Mining}}We have mined {\bf x} multilayer perceptron (MLP) models from 3000 Keras repositories. We extract the MLPs from the mined Python files by using control flow graph (CFG) and store them in form of abstract neural network (ANN). In particular, the CFG parse through each statement of the Python files and collect the API names. If the API names is used to construct Keras models, we will collect them. When CFG complete parsing, the output will be a extracted MLP in form of ANN.
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{.45\linewidth}
+		\begin{lstlisting}[basicstyle=\tiny,numberblanklines=false]
+		model.add(Dense(units=64, activation='relu', input_dim=100)) 
+		
+		model.add(Dense(units=10, activation='softmax'))
+		\end{lstlisting}
+		\caption{Original MLP}
+		\label{fig:originalCNN}
+	\end{subfigure}
+	\begin{subfigure}[b]{.45\linewidth}
+		\begin{lstlisting}[basicstyle=\tiny,numberblanklines=false]	
+		{'func': 'Dense', 'input_dim':100, 'units': 64} 
+		{'func': 'relu'}
+		{'func': 'Dense', 'units': 64}
+		{'func': 'softmax'}
+		\end{lstlisting}
+		\caption{ANN}
+		\label{fig:convertedCNN}
+	\end{subfigure}
+	\caption{Original MLP vs ANN}
+	\label{fig:converted}
+\end{figure}
+Figure \ref{fig:converted} shows the example of original MLP and ANN. ANN is a graph whose nodes represent for model layers and edges represent for the order of the layers. For example, the first line is Dense layer which includes three information which are 100 input channel, 64 output channel, and Relu activation. Actually, Relu activation is a layer; thus, we seperate this layer in two layer, Dense layer and activation layer.
+\subsubsection{Evaluation Metrics}
 
 \subsection{Experimental Methodology}
+RQ1: What is the best value for $\delta$.
+Using model mining, we will emprically evaluate the $\delta$ value.
+
+RQ2: How efficient is this approach?
+
+RQ3: How effective is this approach?
+
+
+%\subsection{Results}
 
 
 
-\subsection{Results}
+
+%\subsection{Analysis}
 
 
 
 
-\subsection{Analysis}
-
-
-
-
-\subsection{Summary}
+%\subsection{Summary}
 
 
 
