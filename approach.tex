@@ -7,7 +7,7 @@ f(\sum_{\chi}{W_iX_i+B}), \chi\sim D(\mu, \sigma^2)
 In the equation above, the traditional dense operation has been depicted as an example, where, $W_i$, $X_i$, $B_i$, $f()$, and $D$ represents the weight, input, bias, the activation function, and a unknown distribution of the operations respectively that require random initialization. The output of this learning process will be an interval of value rather than a single concrete value. In Figure \ref{fig:rq5}, we have depicted a similar scenario that includes the learning of the distribution, which results in an interval reported as "[Low, High]". The interval is similar to any algorithmic evaluation with the best-case and worst-case scenario. 
 Our methodology has been discuss as follows,
 \subsection{Optimized Loss Function}
-\subsubsection{Mining Randomly Initialized Parameter.}
+\subsubsection{Identifying Randomly Initialized Parameter.}
 In this phase, we have to understand the parameters that are subject to the random initialization. For this study, we have already mentioned that our focus has been on the deep learning-based image classifiers. To do so, we have mined the \emph{Keras} documentation to understand the implementation of DNN API. In this process, 3 Ph.D. students have individually gone through the implementation of all the functions. Our goal is two-fold here, 1) Identify the places, where random initialization has taken place that describe the learning-based system, 2) If we can mine the type of distribution from the implementation, then we can understand how the values correspond to that particular parameter has propagated to the output metrics. Our mining technique has identified a class of operation in \emph{Keras} that is responsible for initializing the parameters, called \emph{Initializers.} 
 \begin{lstlisting}
 model.add(Dense(64,
@@ -22,11 +22,12 @@ To identify the distribution of these parameters, we have validated the implemen
 	\item Ones: This initializes the parameter with 1.
 	\item Constant: Initializing with a constant is depended on the users' choice of the value.
 	\item Normal Distribution: The parameter will be initialized with a normal distribution that takes input as mean ($\mu$) and the standard distribution ($\sigma$) to describe the distribution.
-	\item Uniform distribution
-	\item Truncated Normal Distribution
-	\item LeCun uniform initializer.
-	\item Glorot normal initializer
-	\item Glorot uniform initializer
+	\item Uniform distribution: This initializes parameter with a uniform distribution where the range of a minimum and maximum value can be specified.
+	\item Truncated Normal Distribution: The parameter is initialized with a truncated normal distribution where values greater than 2 standard deviations from mean are omitted. Here, the mean and standard deviation of the random values are used as arguments.
+	\item LeCun uniform initializer: This initializes parameter using a uniform distribution where input unit numbers are specified as the limit for drawing samples from it.
+	\item Glorot normal initializer: In this initializer, truncated normal distribution using the number of input and output units are used for drawing samples. 
+	\item Glorot uniform initializer: This initializes parameter using a uniform distribution where input unit numbers along with the output unit numbers are specified as the limit for drawing samples from it. \\
+	We can observe how kernel and bias initializers are initialized from the following example,
 	\begin{lstlisting}
 	class Dense(Layer):
 	def __init__(self, units,
@@ -34,7 +35,7 @@ To identify the distribution of these parameters, we have validated the implemen
 	bias_initializer='zeros',
 	....
 	**kwargs):\end{lstlisting}
-	\item LeCun normal initializer.
+	\item LeCun normal initializer: In this initializer, truncated normal distribution using the number of input units are used for drawing samples.
 \end{itemize}
 \subsubsection{Finding optimized initial Weight and Bias}
 -Algorithm and its description
