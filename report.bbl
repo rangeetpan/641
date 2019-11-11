@@ -1,0 +1,122 @@
+\begin{thebibliography}{10}
+
+\bibitem{pulina2010abstraction}
+Pulina, L., Tacchella, A.:
+\newblock An abstraction-refinement approach to verification of artificial
+  neural networks.
+\newblock In: International Conference on Computer Aided Verification, Springer
+  (2010)  243--257
+
+\bibitem{gehr2018ai2}
+Gehr, T., Mirman, M., Drachsler-Cohen, D., Tsankov, P., Chaudhuri, S., Vechev,
+  M.:
+\newblock Ai2: Safety and robustness certification of neural networks with
+  abstract interpretation.
+\newblock In: 2018 IEEE Symposium on Security and Privacy (SP), IEEE (2018)
+  3--18
+
+\bibitem{du2018techniques}
+Du, M., Liu, N., Hu, X.:
+\newblock Techniques for interpretable machine learning.
+\newblock arXiv preprint arXiv:1808.00033 (2018)
+
+\bibitem{abdul2018trends}
+Abdul, A., Vermeulen, J., Wang, D., Lim, B.Y., Kankanhalli, M.:
+\newblock Trends and trajectories for explainable, accountable and intelligible
+  systems: An hci research agenda.
+\newblock In: Proceedings of the 2018 CHI conference on human factors in
+  computing systems, ACM (2018)  582
+
+\bibitem{zhang2016understanding}
+Zhang, C., Bengio, S., Hardt, M., Recht, B., Vinyals, O.:
+\newblock Understanding deep learning requires rethinking generalization.
+\newblock arXiv preprint arXiv:1611.03530 (2016)
+
+\bibitem{wang2018formal}
+Wang, S., Pei, K., Whitehouse, J., Yang, J., Jana, S.:
+\newblock Formal security analysis of neural networks using symbolic intervals.
+\newblock In: 27th $\{$USENIX$\}$ Security Symposium ($\{$USENIX$\}$ Security
+  18). (2018)  1599--1614
+
+\bibitem{katz2017reluplex}
+Katz, G., Barrett, C., Dill, D.L., Julian, K., Kochenderfer, M.J.:
+\newblock Reluplex: An efficient smt solver for verifying deep neural networks.
+\newblock In: International Conference on Computer Aided Verification, Springer
+  (2017)  97--117
+
+\bibitem{jia2019taso}
+Jia, Z., Padon, O., Thomas, J., Warszawski, T., Zaharia, M., Aiken, A.:
+\newblock Taso: Optimizing deep learning computation with automatic generation
+  of graph substitutions.
+\newblock (2019)
+
+\bibitem{datta2016algorithmic}
+Datta, A., Sen, S., Zick, Y.:
+\newblock Algorithmic transparency via quantitative input influence: Theory and
+  experiments with learning systems.
+\newblock In: 2016 IEEE symposium on security and privacy (SP), IEEE (2016)
+  598--617
+
+\bibitem{papernot2016towards}
+Papernot, N., McDaniel, P., Sinha, A., Wellman, M.:
+\newblock Towards the science of security and privacy in machine learning.
+\newblock arXiv preprint arXiv:1611.03814 (2016)
+
+\bibitem{anderson2019optimization}
+Anderson, G., Pailoor, S., Dillig, I., Chaudhuri, S.:
+\newblock Optimization and abstraction: a synergistic approach for analyzing
+  neural network robustness.
+\newblock In: Proceedings of the 40th ACM SIGPLAN Conference on Programming
+  Language Design and Implementation, ACM (2019)  731--744
+
+\bibitem{pan2019static}
+Pan, R.:
+\newblock Static deep neural network analysis for robustness.
+\newblock In: Proceedings of the 2019 27th ACM Joint Meeting on European
+  Software Engineering Conference and Symposium on the Foundations of Software
+  Engineering, ACM (2019)  1238--1240
+
+\bibitem{ribeiro2016should}
+Ribeiro, M.T., Singh, S., Guestrin, C.:
+\newblock Why should i trust you?: Explaining the predictions of any
+  classifier.
+\newblock In: Proceedings of the 22nd ACM SIGKDD international conference on
+  knowledge discovery and data mining, ACM (2016)  1135--1144
+
+\bibitem{du2018towards}
+Du, M., Liu, N., Song, Q., Hu, X.:
+\newblock Towards explanation of dnn-based prediction with guided feature
+  inversion.
+\newblock In: Proceedings of the 24th ACM SIGKDD International Conference on
+  Knowledge Discovery \& Data Mining, ACM (2018)  1358--1367
+
+\bibitem{zhang2018interpretable}
+Zhang, Q., Nian~Wu, Y., Zhu, S.C.:
+\newblock Interpretable convolutional neural networks.
+\newblock In: Proceedings of the IEEE Conference on Computer Vision and Pattern
+  Recognition. (2018)  8827--8836
+
+\bibitem{veale2018fairness}
+Veale, M., Van~Kleek, M., Binns, R.:
+\newblock Fairness and accountability design needs for algorithmic support in
+  high-stakes public sector decision-making.
+\newblock In: Proceedings of the 2018 chi conference on human factors in
+  computing systems, ACM (2018)  440
+
+\bibitem{sampson2014expressing}
+Sampson, A., Panchekha, P., Mytkowicz, T., McKinley, K.S., Grossman, D., Ceze,
+  L.:
+\newblock Expressing and verifying probabilistic assertions.
+\newblock In: ACM SIGPLAN Notices. Volume~49., ACM (2014)  112--122
+
+\bibitem{sutskever2013importance}
+Sutskever, I., Martens, J., Dahl, G., Hinton, G.:
+\newblock On the importance of initialization and momentum in deep learning.
+\newblock In: International conference on machine learning. (2013)  1139--1147
+
+\bibitem{ingber2000adaptive}
+Ingber, L.:
+\newblock Adaptive simulated annealing (asa): Lessons learned.
+\newblock arXiv preprint cs/0001018 (2000)
+
+\end{thebibliography}
