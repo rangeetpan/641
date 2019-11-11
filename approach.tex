@@ -46,7 +46,42 @@ To identify the distribution of these parameters, we have validated the implemen
 	\item LeCun normal initializer: In this initializer, truncated normal distribution using the number of input units are used for drawing samples.
 \end{itemize}
 \subsubsection{5.1.2. Finding optimized initial Weight and Bias}
--Algorithm and its description
+From the \emph{Keras} documentation, we have found that weight and bias parameters are responsible for the change of the output metric in a DNN model. These two parameters are randomly initialized from the user-provided distribution or with the default one. Thus, our goal in this study is to find the value of the bias and weight s.t. the accuracy will be the highest or the loss value will be the least. This is a linear optimization problem, which is solvable in exponential time, but the nearest optimum solution can be achieved in polynomial time. Therefore, we have used an adaptive simulated annealing \cite{ingber2000adaptive} to find the optimized value of the weight and bias combination that leads to better accuracy. 
+\begin{algorithm}[H]
+	\footnotesize
+	\caption{\footnotesize Adaptive Simulated Annealing Based Search.}
+	\label{algo:asa}
+	\begin{algorithmic}[1]
+		\Procedure{asa($model, W_d, B_d$)}{}
+		\State $\delta$=C, $exit\_flag$=False;
+		\For {each $i\in m$}\label{algo1:l3}
+		\State $W_i=0$\label{algo1:l4}
+		\State $B_i=0$\label{algo1:l5}
+		\While{$exit\_flag$=False}\label{algo1:l7}
+		\State $W'=W_i+\delta$
+		\State $B'=B_i+\delta$
+		\If{$W'\in W_d$ and $B'\in B_d$}
+		\State $Obj=L(W_i,B_i)-L(W',B')$
+		\If{$obj\le0$}
+		\State $exit\_flag$=False
+		\Else
+		\State $P=e^{\frac{-obj}{L(W',B')}}$
+		\State $P'=Random()$
+		\If{$P'\le P$}
+		\State  $exit\_flag$=False
+		\EndIf
+		\EndIf
+		\Else
+		\State Go to \ref{algo1:l7}
+		\EndIf
+		\EndWhile
+		\State $W_i=W', B_i=B'$
+		\EndFor\label{algo1:l6}
+		\State \Return $1-L(W,B)$\label{algo2:l12}
+		\EndProcedure\label{algo2:l13}
+	\end{algorithmic} 
+\end{algorithm}
+In the Algo. \ref{algo:asa}, we have initialized the starting point of the weight and bias to be zero and then we increase the value of the weight and bias initializing value with the step size parameter $\delta$. For each instance, we compute the loss value $L(W, B)$, where $W$ and $B$ represent the initial chosen value of weight and bias. As our goal is to minimize the $L(W, B)$, we run the process until we get a better value. If we get a better result, we validate that the value of the weight and bias do not represent a local minima in the search space, thereupon, we compute a probability value $P$ and a random value in the range $[0,1]$ and similar to the simulated annealing process, we compute the process again the probability is greater than random value. Similarly, we find the value of the weight and bias that provides the near-optimum loss value and with that, we compute the accuracy as $1-L(W, B)$ as in our study, we use the probability as the output metric and $1-loss$ represents the accuracy of the model. In this proposed approach, we start the step size parameter with a constant $C$ that we compute using an empirical evaluation and fix that for a genre of problems.
 \subsection{Assertion of DNN Accuracy}
 This approach includes the validation framework from the learned distribution. We have proposed an assertion mechanism that verify the operation of the distribution and the input to restrict the learning process to go beyond the desired interval of output metrics. We propose \emph{ADNN}, a specification language that restricts a learning process from a pair $(f,\nu)$, where $f$ and $\nu$ denotes the learning process and the specification provided by the user. An example of the programming language is depicted as below.
 \begin{lstlisting}[language=Python, caption=Accountable specification language]
