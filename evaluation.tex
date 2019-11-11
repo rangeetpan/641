@@ -9,7 +9,7 @@
 	\label{fig:mlp}
 	%\vspace{15pt}
 \end{figure}
-We have mined {\bf x} multilayer perceptron (MLP) models from 3000 Keras repositories. However, there are many different kinds of machine learning models in 3000 Keras repositories. Thus, we have to identify which model is MLP. To address this problem, we need to identify the general structure of MLP. Then, we filter the models which are not belong to this structure. Figure \figref{fig:mlp} represent a general structure of MLP. There are three components in MLP's structure which are input layer, hidden layer, output layer. Moreover, all of these layer are constructed by using Dense layer and activation layer. Therefore, if a mined model have another kinds of layer like convolutional layer or recurrent layer, it will be discarded. To detect and extract MLPs, we have used control flow graph (CFG). In particular, we manually collect a list of the Keras APIs used to build Keras models. Then, the CFG parses through each statement of the Python files and collect the API names. If the API names is belong to the APIs list, we will collect them. After that, we connect all the API calls together to acquire a complete model. If a model contains at least one API which are not used for constructing MLP, we will remove it. Moreover, we also filter the MLP models which miss some requirement information like input shape or output channel.
+We have mined {\bf x} multilayer perceptron (MLP) models from 3000 Keras GitHub repositories. However, there are many different kinds of machine learning models in those repositories. To identify the MLP model, the general structure of MLP is required to be investigated. Then, we filter the models which do not belong to that structure.  A general structure of MLP is depicted in Figure \figref{fig:mlp}. There are three components in the MLP structure e.g., the input layer, hidden layer, and the output layer. Moreover, all of these layers are constructed using the Dense layer and activation layer. Therefore, if a mined model has another kind of layers like a convolutional layer or recurrent layer, it will be discarded. To detect and extract MLP, we have used the control flow graph (CFG). In particular, we manually collect a list of Keras APIs used to build Keras models. Then, the CFG parses through each statement of the Python files and collect the API names. If the API names belong to the APIs list, we will collect them. After that, we connect all the API calls to acquire a complete model. If a model contains at least one API which is not used for constructing MLP, we will remove it. Moreover, we also filter the MLP models which miss some requirement information like input shape or output channel.
 \begin{figure}
 	\centering
 	\begin{subfigure}[b]{.45\linewidth}
@@ -31,13 +31,13 @@ We have mined {\bf x} multilayer perceptron (MLP) models from 3000 Keras reposit
 		\caption{ANN}
 		\label{fig:convertedCNN}
 	\end{subfigure}
-	\caption{Original MLP vs ANN}
+	\caption{Example of an original MLP and ANN}
 	\label{fig:converted}
 \end{figure}
 
 
 
-To be easier in using the mined models, we have stored them in form of abstract neural network (ANN). Figure \ref{fig:converted} shows the example of original MLP and ANN. ANN is a graph whose nodes represent for model layers and edges represent for the order of the layers. For example, the first line is Dense layer which includes three information which are 100 input channel, 64 output channel, and Relu activation. Actually, Relu activation is a layer; thus, we seperate this layer in two layer, Dense layer and activation layer.
+For the convenience of using the mined models, we have stored them in the form of an abstract neural network (ANN). Figure \ref{fig:converted} shows the example of an original MLP and ANN. ANN is a graph in which nodes represent for model layers and edges represent the order of the layers. For example, the first line is the Dense layer which includes three information which are 100 input channels, 64 output channels, and Relu activation layer. Thus, we separate this layer in two layers i.e., the Dense layer and activation layer.
 \begin{algorithm}
 	\caption{Model Mining}\label{euclid}
 	\begin{algorithmic}[1]
