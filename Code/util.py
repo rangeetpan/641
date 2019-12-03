@@ -12,6 +12,7 @@ class Util:
         self.input_layer=input_layer
         self.output_layer=output_layer
         self.lr=lr
+        #To-do
         self.input_W=np.random.randn(input_layer,hidden_layer)
         self.input_B=np.random.randn(hidden_layer)
         self.hidden_W=np.random.randn(hidden_layer,output_layer)
