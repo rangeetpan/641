@@ -51,5 +51,5 @@ class Util:
         """Store the error value into the weight value"""
         self.input_W+=-self.lr*del_input_W
         self.output_W+=-self.lr*del_output_W
-
-
+    def localSearch(self, loss):
+        
