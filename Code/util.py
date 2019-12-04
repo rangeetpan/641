@@ -82,14 +82,15 @@ class Util:
         delta = 0.01
         n = 0
         current_time = datetime.datetime.now()
+        efficiency = False
 
         while True:
             loss = self.forwardPropagation(input, label, 0 + delta * n, 0 + delta * n, 0 + delta * n, 0 + delta * n)[0]
-            
             if loss < min_loss:
+                efficiency = True
                 min_loss = loss
             after_search = datetime.datetime.now()
             if current_time - after_search == 3600:
-                return delta * n, min_loss
+                return delta * n, min_loss, efficiency
             n += 1
             # loss2 = self.forwardPropagation(input, label, 0 + delta * n, 0 + delta * n, 0 + delta * n, 0 + delta * n)[0]
