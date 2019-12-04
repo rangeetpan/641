@@ -7,7 +7,7 @@ Created on Tue Dec  3 11:19:17 2019
 """
 
 import numpy as np
-
+import datetime
 
 class Util:
     def __init__(self, input_layer, hidden_layer, output_layer, lr):
@@ -76,15 +76,20 @@ class Util:
         self.output_W += -self.lr * del_output_W
 
     def localSearch(self, input, label):
-        loss = self.forwardPropagation(input, label, self.input_W, self.input_B, self.hidden_W, self.hidden_B)[0]
+        min_loss = self.forwardPropagation(input, label, self.input_W, self.input_B, self.hidden_W, self.hidden_B)[0]
         #node_hidden = self.forwardPropagation(input, label, self.input_W, self.input_B, self.hidden_W, self.hidden_B)[1]
         #node_output = self.forwardPropagation(input, label, self.input_W, self.input_B, self.hidden_W, self.hidden_B)[2]
         delta = 0.01
         n = 0
-        while True:
-            loss1 = self.forwardPropagation(input, label, 0 + delta * n, 0 + delta * n, 0 + delta * n, 0 + delta * n)[0]
-            if loss1 < loss:
-                return delta * n, loss1
+        current_time = datetime.datetime.now()
 
+        while True:
+            loss = self.forwardPropagation(input, label, 0 + delta * n, 0 + delta * n, 0 + delta * n, 0 + delta * n)[0]
+            
+            if loss < min_loss:
+                min_loss = loss
+            after_search = datetime.datetime.now()
+            if current_time - after_search == 3600:
+                return delta * n, min_loss
             n += 1
             # loss2 = self.forwardPropagation(input, label, 0 + delta * n, 0 + delta * n, 0 + delta * n, 0 + delta * n)[0]
