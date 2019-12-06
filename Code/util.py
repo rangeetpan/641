@@ -94,3 +94,33 @@ class Util:
                 return delta * n, min_loss, efficiency
             n += 1
             # loss2 = self.forwardPropagation(input, label, 0 + delta * n, 0 + delta * n, 0 + delta * n, 0 + delta * n)[0]
+    def ASASearch(self, input_W, input_B):
+         delta=C
+         exit_flag=False
+         for i in self.inputs:
+             W_i= 0
+             B_i= 0
+#        label: check
+         while exit_flag ==False:
+             W = W_i+delta
+             B = B_i+delta
+             if W in input_W and B in input_B:
+                 obj=loss(W_i,B_i)-loss(W,B)
+                 if obj <= 0:
+                     exit_flag=False
+                 else:
+                     P = np.exp((-obj/loss(W,B)))
+                     P_rand = np.random
+                     if P_rand <= P:
+                         exit_flag=False
+ #             else:  
+ #                 goto check
+             W_p = W
+             B_p = B
+                 return 1-loss(W,B)
+     
+#    def loss(input_W, input_B):
+         
+         
+#         return
+         
