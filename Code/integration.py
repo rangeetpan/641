@@ -12,6 +12,7 @@ from keras.datasets import mnist
 x_train=x_train.astype('float32')/255.0
 x_train=x_train.reshape(60000,784)
 NN = Util(784, 100, 10, 0.1)
+count=1
 ##############Algorithm Based Initialization#################
 delta=0.002
 exit_flag=False
@@ -28,7 +29,7 @@ for i in range(50):
     #print(loss)
     NN.backwardPropagation(x_train,y_train,loss,node_hidden, node_output)
     accuracy=NN.accuracyComputation(x_train,y_train)
-    print("Iteration: "+str(i)+" Accuracy: "+str(accuracy))
+print("Actual Accuracy: "+str(accuracy))
 while exit_flag ==False:
     input_W=input_W-delta
     input_B=input_B-delta
@@ -43,7 +44,8 @@ while exit_flag ==False:
         #print(loss)
         NN.backwardPropagation(x_train,y_train,loss,node_hidden, node_output)
         accuracy=NN.accuracyComputation(x_train,y_train)
-        print("Iteration: "+str(i)+" Accuracy: "+str(accuracy))
+    print("Iteration "+str(count)+" ADNN Accuracy: "+str(accuracy))
+    count=count+1
     obj=loss-loss1
     loss=loss1
     if(obj<=0):
