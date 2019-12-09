@@ -38,7 +38,7 @@ class Util:
         node_output = exp_node_output / np.sum(exp_node_output, axis=1, keepdims=True)
         #print(node_output)
         #node_output = self.softmax(node_output)
-        loss = np.sum(-np.log(node_output[range(inputs.shape[0]),label]))/(inputs.shape[0])
+        loss = np.sum(-np.log(node_output[range(inputs.shape[0]),label]))/(inputs.shape[0])+0.2 * self.regularizer*np.sum(self.input_W *self.input_W)
         """Loss= Input data loss + Loss correction by penalizing the loss, here we use 0.2 as an experimental value"""
         #loss = np.sum(-np.log(node_output[range(inputs.shape[0]), label])) / (inputs.shape[0]) + 0.2 * self.regularizer * np.sum(self.input_W ^ 2) + 0.2 * self.regularizer * np.sum(self.hidden_W ^ 2)
         return loss, node_hidden, node_output
