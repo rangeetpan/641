@@ -14,7 +14,7 @@ x_train=x_train.reshape(60000,784)
 NN = Util(784, 100, 10, 0.1)
 count=1
 ##############Algorithm Based Initialization#################
-delta=0.002
+delta=0.003  # change delta 
 exit_flag=False
 input_W = 0.01*np.random.randn(784, 100)
 hidden_W = 0.01*np.random.randn(100, 10)
@@ -55,6 +55,8 @@ while exit_flag ==False:
         P_rand = np.random.normal()
         if P_rand <= P:
             exit_flag=False
+        else:
+            exit_flag=True
 #              W = W_i+delta
 #              B = B_i+delta
 #              if W in input_W and B in input_B:
