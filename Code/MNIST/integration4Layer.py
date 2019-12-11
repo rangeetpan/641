@@ -23,7 +23,7 @@ x_train=x_train.astype('float32')/255.0
 x_train=x_train.reshape(60000,784)
 y_train=to_categorical(y_train)
 y_train=y_train.astype('float64')
-for i in range(0,50):
+for i in range(0,20):
 # Parameters
     n_hidden_1 = 256 # 1st layer number of neurons
     n_hidden_2 = 256
