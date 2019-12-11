@@ -25,16 +25,19 @@ y_train=to_categorical(y_train)
 y_train=y_train.astype('float64')
 
 # Parameters
+n_hidden_1 = 256 # 1st layer number of neurons
+n_hidden_2 = 256
+n_input = 784
 count=0
 learning_rate = 0.001
 training_epochs = 10
 batch_size = 100
-delta1=[ [ +0.002 ] * 256 ] * 784
-delta2=[ [ +0.002 ] * 256 ] * 256 # change delta
+delta=0.002
+delta1=[ [ +delta ] * n_hidden_1 ] * n_input
+delta2=[ [ +delta ] * n_hidden_2 ] * n_hidden_1 # change delta
+delta3=[ +delta ] * n_hidden_1
+delta4= [ +delta ] * n_hidden_2   # change delta
 exit_flag=False
-# Network Parameters
-n_hidden_1 = 256 # 1st layer number of neurons
-n_input = 784 # MNIST data input (img shape: 28*28)
 n_classes = 10 # MNIST total classes (0-9 digits)
 NN=Util(n_input,n_classes,n_hidden_1)
 loss, accuracy=NN.train(x_train,y_train,learning_rate,training_epochs,batch_size)
