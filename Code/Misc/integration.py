@@ -7,8 +7,8 @@ Created on Fri Dec  6 20:24:46 2019
 """
 from util import Util
 import numpy as np
-from keras.datasets import mnist
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+from keras.datasets import fashion_mnist
+(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
 x_train=x_train.astype('float32')/255.0
 x_train=x_train.reshape(60000,784)
 NN = Util(784, 100, 10, 0.1)
@@ -16,15 +16,15 @@ count=1
 ##############Algorithm Based Initialization#################
 delta=0.003  # change delta 
 exit_flag=False
-input_W = 0.01*np.random.randn(784, 100)
-hidden_W = 0.01*np.random.randn(100, 10)
-input_B = 0.01*np.random.randn(100)
-hidden_B = 0.01*np.random.randn(10)
+input_W = 0.008*np.random.randn(784, 100)
+hidden_W = 0.008*np.random.randn(100, 10)
+input_B = 0.008*np.random.randn(100)
+hidden_B = 0.008*np.random.randn(10)
 NN.input_W=input_W
 NN.input_B=input_B
 NN.hidden_W=hidden_W
 NN.hidden_B=hidden_B
-for i in range(50):
+for i in range(400):
     loss, node_hidden, node_output=NN.forwardPropagation(x_train, y_train)
     #print(loss)
     NN.backwardPropagation(x_train,y_train,loss,node_hidden, node_output)
@@ -39,12 +39,12 @@ while exit_flag ==False:
     NN.input_B=input_B
     NN.hidden_W=hidden_W
     NN.hidden_B=hidden_B
-    for i in range(50):
+    for i in range(400):
         loss1, node_hidden, node_output=NN.forwardPropagation(x_train, y_train)
         #print(loss)
         NN.backwardPropagation(x_train,y_train,loss,node_hidden, node_output)
         accuracy=NN.accuracyComputation(x_train,y_train)
-    print("Iteration "+str(count)+" ADNN Accuracy: "+str(accuracy))
+    print("Trial "+str(count)+" ADNN Accuracy: "+str(accuracy))
     count=count+1
     obj=loss-loss1
     loss=loss1
@@ -52,7 +52,7 @@ while exit_flag ==False:
         exit_flag ==False
     else:
         P = np.exp((-obj/loss1))
-        P_rand = np.random.normal()
+        P_rand = np.random.uniform(0,1)
         if P_rand <= P:
             exit_flag=False
         else:

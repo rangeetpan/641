@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec  3 11:19:17 2019
+Created on Tue Dec 10 22:53:43 2019
 
-@author: rangeet
+@author: rangeetpan
 """
-
 import numpy as np
-import datetime
 
 class Util:
     def __init__(self, input_layer, hidden_layer, output_layer, lr):
@@ -24,7 +22,7 @@ class Util:
     def softmax(self, x):
         """Compute softmax values for each sets of scores in x."""
         e_x = np.exp(x - np.max(x))
-        return e_x / e_x.sum(axis=0)  # only difference
+        return e_x / e_x.sum(axis=0)
 
     def forwardPropagation(self, inputs, label):
         """ Inputs are taken as the 1D array and so as the label"""
@@ -87,57 +85,3 @@ class Util:
         prediction=np.argmax(self.softmax(layer_2),axis=1)
         #print(prediction)
         return np.mean(prediction==label)
-
-
-    def localSearch(self, input, label):
-        min_loss = self.forwardPropagation(input, label, self.input_W, self.input_B, self.hidden_W, self.hidden_B)[0]
-        #node_hidden = self.forwardPropagation(input, label, self.input_W, self.input_B, self.hidden_W, self.hidden_B)[1]
-        #node_output = self.forwardPropagation(input, label, self.input_W, self.input_B, self.hidden_W, self.hidden_B)[2]
-        delta = 0.01
-        n = 0
-        current_time = datetime.datetime.now()
-        efficiency = False
-
-        while True:
-            loss = self.forwardPropagation(input, label, 0 + delta * n, 0 + delta * n, 0 + delta * n, 0 + delta * n)[0]
-            if loss < min_loss:
-                efficiency = True
-                min_loss = loss
-            after_search = datetime.datetime.now()
-            if current_time - after_search == 3600:
-                return delta * n, min_loss, efficiency
-            n += 1
-            # loss2 = self.forwardPropagation(input, label, 0 + delta * n, 0 + delta * n, 0 + delta * n, 0 + delta * n)[0]
-# =============================================================================
-# Not working code: Has code error. Will add after fix
-#     def ASASearch(self, input_W, input_B):
-#          delta=C
-#          exit_flag=False
-#          for i in self.inputs:
-#              W_i= 0
-#              B_i= 0
-# #        label: check
-#          while exit_flag ==False:
-#              W = W_i+delta
-#              B = B_i+delta
-#              if W in input_W and B in input_B:
-#                  obj=loss(W_i,B_i)-loss(W,B)
-#                  if obj <= 0:
-#                      exit_flag=False
-#                  else:
-#                      P = np.exp((-obj/loss(W,B)))
-#                      P_rand = np.random
-#                      if P_rand <= P:
-#                          exit_flag=False
-#  #             else:  
-#  #                 goto check
-#              W_p = W
-#              B_p = B
-#         #return 1-loss(W,B)
-# =============================================================================
-     
-#    def loss(input_W, input_B):
-         
-         
-#         return
-         
