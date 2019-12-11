@@ -50,8 +50,10 @@ while exit_flag ==False:
     NN.weights['h2'].assign_add(delta2)
     NN.weights['h3'].assign_add(delta2)
     NN.weights['h4'].assign_add(delta2)
-    #NN.biases['b1'].assign_add(delta1)
-    #NN.biases['b2'].assign_add(delta2)
+    NN.biases['b1'].assign_add(delta3)
+    NN.biases['b2'].assign_add(delta4)
+    NN.biases['b3'].assign_add(delta3)
+    NN.biases['b4'].assign_add(delta4)
     loss1, accuracy=NN.train(x_train,y_train,learning_rate,training_epochs,batch_size)
     print("Trial "+str(count)+" ADNN Accuracy: "+str(accuracy))
     count=count+1

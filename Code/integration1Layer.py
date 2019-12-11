@@ -45,7 +45,7 @@ print("Actual Accuracy: "+ str(accuracy))
 while exit_flag ==False:
     NN.weights['h1'].assign_add(delta1)
     #NN.weights['h2'].assign_add(delta2)
-    #NN.biases['b1'].assign_add(delta1)
+    NN.biases['b1'].assign_add(delta3)
     #NN.biases['b2'].assign_add(delta2)
     loss1, accuracy=NN.train(x_train,y_train,learning_rate,training_epochs,batch_size)
     print("Trial "+str(count)+" ADNN Accuracy: "+str(accuracy))
