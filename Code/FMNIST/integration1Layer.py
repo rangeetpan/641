@@ -42,7 +42,7 @@ for i in range(0,50):
     loss, accuracy=NN.train(x_train,y_train,learning_rate,training_epochs,batch_size)
     text_file = open("Output_fmnist_Layer1_"+str(delta)+".txt", "w")
     text_file.write("Actual Accuracy: "+ str(accuracy)+"\n")
-    while count<=100:
+    while count<=50:
         NN.weights['h1'].assign_add(delta1)
         #NN.weights['h2'].assign_add(delta2)
         NN.biases['b1'].assign_add(delta3)
