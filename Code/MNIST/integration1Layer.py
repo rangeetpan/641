@@ -16,7 +16,7 @@ Created on Wed Dec 11 02:46:19 2019
 from keras.datasets import mnist
 from keras.utils import to_categorical
 import numpy as np
-from util1Layer import Util
+from MNIST.util1Layer import Util
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 x_train=x_train.astype('float32')/255.0
 x_train=x_train.reshape(60000,784)
