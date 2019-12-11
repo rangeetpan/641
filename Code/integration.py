@@ -16,15 +16,15 @@ count=1
 ##############Algorithm Based Initialization#################
 delta=0.002
 exit_flag=False
-input_W = 0.01*np.random.randn(784, 100)
-hidden_W = 0.01*np.random.randn(100, 10)
-input_B = 0.01*np.random.randn(100)
-hidden_B = 0.01*np.random.randn(10)
+input_W = 0.008*np.random.randn(784, 100)
+hidden_W = 0.008*np.random.randn(100, 10)
+input_B = 0.008*np.random.randn(100)
+hidden_B = 0.008*np.random.randn(10)
 NN.input_W=input_W
 NN.input_B=input_B
 NN.hidden_W=hidden_W
 NN.hidden_B=hidden_B
-for i in range(50):
+for i in range(100):
     loss, node_hidden, node_output=NN.forwardPropagation(x_train, y_train)
     #print(loss)
     NN.backwardPropagation(x_train,y_train,loss,node_hidden, node_output)
@@ -39,12 +39,12 @@ while exit_flag ==False:
     NN.input_B=input_B
     NN.hidden_W=hidden_W
     NN.hidden_B=hidden_B
-    for i in range(50):
+    for i in range(100):
         loss1, node_hidden, node_output=NN.forwardPropagation(x_train, y_train)
         #print(loss)
         NN.backwardPropagation(x_train,y_train,loss,node_hidden, node_output)
         accuracy=NN.accuracyComputation(x_train,y_train)
-    print("Iteration "+str(count)+" ADNN Accuracy: "+str(accuracy))
+    print("Trial "+str(count)+" ADNN Accuracy: "+str(accuracy))
     count=count+1
     obj=loss-loss1
     loss=loss1
