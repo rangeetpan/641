@@ -17,7 +17,7 @@ from __future__ import print_function
 from keras.datasets import mnist
 from keras.utils import to_categorical
 import numpy as np
-from MNIST.util4Layer import Util
+from util4Layer import Util
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 x_train=x_train.astype('float32')/255.0
 x_train=x_train.reshape(60000,784)
@@ -69,3 +69,4 @@ for i in range(0,20):
                 exit_flag=False
             else:
                 exit_flag=True
+    text_file.close()
