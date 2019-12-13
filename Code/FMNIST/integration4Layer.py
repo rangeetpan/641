@@ -23,7 +23,7 @@ x_train=x_train.astype('float32')/255.0
 x_train=x_train.reshape(60000,784)
 y_train=to_categorical(y_train)
 y_train=y_train.astype('float64')
-for i in range(0,20):
+for i in range(0,1):
 # Parameters
     n_hidden_1 = 256 # 1st layer number of neurons
     n_hidden_2 = 256
@@ -32,7 +32,8 @@ for i in range(0,20):
     learning_rate = 0.001
     training_epochs = 10
     batch_size = 100
-    delta=0.002+i*0.0005
+    #delta=0.002+i*0.0005
+    delta=0.0065
     delta1=[ [ +delta ] * n_hidden_1 ] * n_input
     delta2=[ [ +delta ] * n_hidden_2 ] * n_hidden_1 # change delta
     delta3=[ +delta ] * n_hidden_1
@@ -69,3 +70,4 @@ for i in range(0,20):
                 exit_flag=False
             else:
                 exit_flag=True
+    text_file.close()
