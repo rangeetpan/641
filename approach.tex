@@ -123,9 +123,11 @@ In the Algo. \ref{algo:asa}, we have initialized the starting point of the weigh
 %f(input_image, ....)
 %\\Learning operations
 %\end{lstlisting}
+
+%\end{itemize}
 In this approach, we have explained how an accountable DNN accuracy can be obtained based on user intent. In terms of user intent, we have introduced max\_time, max\_trial, max\_gain which are described as follows:
 \begin{itemize}
-	\item \textbf{max\_time} TODO
-	\item \textbf{max\_trial} TODO
-	\item \textbf{max\_gain} TODO
+	\item \textbf{max\_time} In our approach, we have not restricted to a specific time rather we have provided the user the opportunity to give a certain maximum allowable time until the near-optimal accuracy can be obtained. To emphasize this approach we have empirically run the experiment with two different datasets varying $\delta$ and observe the accuracy based on user given max\_time which has been explained in section \ref{sec:evaluation}. 
+	\item \textbf{max\_trial} Similar to the max\_time, we have not restricted the proposed approach to a specific trial as well. Instead, we have also allowed the user to set a certain maximum allowable trial until the near-optimal accuracy can be obtained independent of maximum allowable time. For clarifying the specific scenario of max\_trial, we have conducted an experiment with MNIST, F-MNIST datasets varying $\delta$ and observe the accuracy based on the provided max\_trial which has been explained in section \ref{sec:evaluation}.
+	\item \textbf{max\_gain} In addition to max\_time and max\_trial, we have used another user intent i.e., max\_gain. The notion of max\_gain is derived from the difference between actual accuracy and how much accuracy we obtained from our proposed approach. As, we have not confined our approach either to a specific time or a certain trial, we have also made this approach accountable by introducing the concept of user-defined maximum obtained gain in terms of accuracy of a DNN model. Moreover, in section \ref{sec:evaluation}we have shown experimental evaluation about how maximum gain can be achieved using three handmade models of each MNIST, F-MNIST datasets with varying $\delta$ in several trials.          
 \end{itemize}
