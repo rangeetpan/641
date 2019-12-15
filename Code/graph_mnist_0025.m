@@ -1,0 +1,198 @@
+x1=[0.99
+-0.41
+-0.71
+0.62
+0.52
+0.97
+0.91
+0.72
+-0.49
+-0.52
+0.11
+-0.10
+0.56
+-0.13
+-0.20
+0.37
+0.55
+-1.92
+0.05
+-1.24
+0.40
+0.46
+0.14
+-0.16
+-0.72
+0.31
+-0.48
+-0.11
+-1.26
+0.62
+0.35
+-0.11
+0.34
+-0.23
+0.05
+0.30
+-0.41
+0.40
+0.59
+-0.22
+-1.80
+-1.91
+-1.61
+-0.24
+-0.44
+0.39
+0.15
+-0.65
+0.30
+-0.47
+-0.54];
+x2=[3.20
+1.86
+0.69
+2.46
+0.58
+2.37
+2.99
+2.06
+1.92
+0.33
+2.78
+3.40
+1.32
+0.91
+1.82
+1.38
+0.69
+2.65
+1.72
+0.86
+2.73
+3.28
+2.91
+2.70
+2.19
+1.96
+1.86
+3.50
+2.58
+0.96
+3.42
+1.43
+1.81
+2.41
+3.23
+2.18
+1.96
+1.46
+2.82
+3.23
+0.78
+1.65
+3.10
+2.46
+2.95
+3.47
+1.46
+0.31
+4.03
+0.26
+-1.94];
+x4=[0.00
+-0.57
+-1.09
+-0.56
+-2.00
+-1.60
+0.25
+-0.43
+-0.98
+-1.08
+-1.15
+-1.49
+-1.63
+-1.59
+-0.10
+-0.72
+0.24
+-2.24
+-0.80
+-0.19
+-0.89
+-0.24
+-1.25
+-1.82
+-0.92
+-1.29
+-0.78
+-0.74
+-0.92
+-0.84
+-0.29
+-1.87
+0.62
+-2.65
+-2.14
+-1.41
+-0.81
+-4.56
+-1.14
+-1.40
+-1.42
+-0.47
+-0.69
+-0.36
+-1.56
+-1.38
+-1.01
+0.03
+-1.55
+0.21
+-1.27];
+y=1:1:51;
+x1max=max(x1);
+y1max=find(x1==x1max);
+x2max=max(x2);
+y2max=find(x2==x2max);
+x4max=max(x4);
+y4max=find(x4==x4max);
+figure
+plot(y,x1,'-o','LineWidth',2,...
+    'MarkerSize',10,...
+    'MarkerEdgeColor','b',...
+    'MarkerFaceColor',[0.5,0.5,0.5])
+hold on
+plot(y,x2,'-ks','LineWidth',2,...
+    'MarkerSize',10,...
+    'MarkerEdgeColor','k',...
+    'MarkerFaceColor',[0.5,0.5,0.5])
+plot(y,x4,'-P','LineWidth',2,...
+    'MarkerSize',10,...
+    'MarkerEdgeColor','r',...
+    'MarkerFaceColor',[0.5,0.5,0.5])
+plot(y1max,x1max,'-^','LineWidth',2,...
+    'MarkerSize',20,...
+    'MarkerEdgeColor','r',...
+    'MarkerFaceColor',[0.5,0.5,0.5])
+plot(y2max,x2max,'-^','LineWidth',2,...
+    'MarkerSize',20,...
+    'MarkerEdgeColor','r',...
+    'MarkerFaceColor',[0.5,0.5,0.5])
+plot(y4max,x4max,'-^','LineWidth',2,...
+    'MarkerSize',20,...
+    'MarkerEdgeColor','r',...
+    'MarkerFaceColor',[0.5,0.5,0.5])
+legend('MNIST-1','MNIST-2','MNIST-4','location','best')
+xlabel('Trial','fontweight','bold','FontSize',16)
+set(gca,'XTickLabelMode','auto')
+ylabel('Gain(%)','fontweight','bold','FontSize',16)
+set(gca,'XLim',[1 51])
+ax = gca;
+ax.FontSize = 16; 
+fig = gcf;
+fig.PaperPositionMode = 'auto'
+fig_pos = fig.PaperPosition;
+fig.PaperSize = [fig_pos(3) fig_pos(4)];
+print(fig, 'MNIST_25.pdf', '-dpdf')
