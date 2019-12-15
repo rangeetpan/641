@@ -115,10 +115,17 @@ In the Algo. \ref{algo:asa}, we have initialized the starting point of the weigh
 		\EndProcedure
 	\end{algorithmic} 
 \end{algorithm}
-\subsection{Assertion of DNN Accuracy}
-This approach includes the validation framework from the learned distribution. We have proposed an assertion mechanism that verify that whether a DNN model can achieve the expected accuracy or not. We propose \emph{ADNN}, a specification language that restricts the learning process from a pair $(f,\nu)$, where $f$ and $\nu$ denotes the learning process and the specification provided by the user. An example of the programming language is depicted as below.
-\begin{lstlisting}[language=Python, caption=Example of specification language]
-@adnn(0.95>accuracy>0.65)
-f(input_image, ....)
-\\Learning operations
-\end{lstlisting}
+%\subsection{Assertion of DNN Accuracy}
+\subsection{Accountable DNN Accuracy based on User Intent}
+%This approach includes the validation framework from the learned distribution. We have proposed an assertion mechanism that verify that whether a DNN model can achieve the expected accuracy or not. We propose \emph{ADNN}, a specification language that restricts the learning process from a pair $(f,\nu)$, where $f$ and $\nu$ denotes the learning process and the specification provided by the user. An example of the programming language is depicted as below.
+%\begin{lstlisting}[language=Python, caption=Example of specification language]
+%@adnn(0.95>accuracy>0.65)
+%f(input_image, ....)
+%\\Learning operations
+%\end{lstlisting}
+In this approach, we have explained how an accountable DNN accuracy can be obtained based on user intent. In terms of user intent, we have introduced max\_time, max\_trial, max\_gain which are described as follows:
+\begin{itemize}
+	\item \textbf{max\_time} TODO
+	\item \textbf{max\_trial} TODO
+	\item \textbf{max\_gain} TODO
+\end{itemize}
