@@ -1,4 +1,4 @@
-\section{Evaluation Plan}
+\section{Results}
 \label{sec:evaluation}
 \subsection{Experimental Setup}
 \subsubsection{\textbf{6.1.1~~Model Mining}}
@@ -63,17 +63,6 @@ We have mined {\bf x} multilayer perceptron (MLP) models from several \emph{Kera
 
 For the convenience of using the mined models, we have stored them in the form of an abstract neural network (ANN). Figure \ref{fig:converted} shows the example of an original MLP and ANN. ANN is a graph in which nodes represent for model layers and edges represent the order of the layers. For example, the first line is the Dense layer which includes three information which are 100 input channels, 64 output channels, and Relu activation layer. Thus, we separate this layer in two layers i.e., the Dense layer and activation layer.
 
-\subsubsection{6.1.2~~ Evaluation Metrics}
-In this study, we have utilized the follwoing evaluation metrics to report our proposed approach's performance.
-\paragraph{Precision, Recall and F-score} These metrics are computed as follows
-\begin{align}
-Precision&=\frac{TP}{TP+FP}\\
-Recall &= \frac{TP}{TP+FN}\\
-F\text{-}Score&=2*\frac{Precision* Recall}{Precision+Recall}
-\end{align}
-In this context, we represent TP, FP, and FN represent the optimum value returned by our approach is greater than the current value, our proposed approach does not find the nearest optimum value, and the optimum value returned by our approach is less than the current value respectively.
-
-\subsection{Experimental Methodology}
 In this section, we discuss the result and the experiments computed to evaluate our proposed approach.
 \paragraph{\textbf{RQ1: What is the value of $\delta$?}}
 We plan to empirically evaluate the value of the $\delta$ using the mined models. Here, we have mined models from a specific set of problems that deal with the image classification. We evaluate our computation metric i.e., recall, precision, and F-score for different values of $\delta$ and chose the value that provides the nearest optimum solution.
@@ -81,6 +70,51 @@ We plan to empirically evaluate the value of the $\delta$ using the mined models
 We can compute the precision, recall, and F-score using all the models with a different value of the user-provided value in our specification language and evaluate the performance.
 \paragraph{\textbf{RQ3: How effective is this approach?}}
 We plan to measure the execution time for each iteration of evaluation and report the time needed to find the optimum solution for different $\delta$ and report the same.
+\begin{figure}
+	\begin{subfigure}[b]{.46\linewidth}{}
+		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/MNIST_Delta}
+		\centering
+		\caption{MNIST}
+		\vspace{2.0em}
+	\end{subfigure}
+	\begin{subfigure}[b]{.46\linewidth}
+		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/FMNIST_Delta}
+		\caption{F-MNIST}
+		\vspace{2.0em}
+	\end{subfigure}
+	
+	\label{fig:delta}
+\end{figure}
+\begin{figure}
+	\begin{subfigure}[b]{.46\linewidth}{}
+		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/MNIST_25}
+		\centering
+		\caption{MNIST}
+		\vspace{2.0em}
+	\end{subfigure}
+	\begin{subfigure}[b]{.46\linewidth}
+		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/FMNIST_25}
+		\caption{F-MNIST}
+		\vspace{2.0em}
+	\end{subfigure}
+	
+	\label{fig:trial1}
+\end{figure}
+\begin{figure}
+	\begin{subfigure}[b]{.46\linewidth}{}
+		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/MNIST_3}
+		\centering
+		\caption{MNIST}
+		\vspace{2.0em}
+	\end{subfigure}
+	\begin{subfigure}[b]{.46\linewidth}
+		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/FMNIST_3}
+		\caption{F-MNIST}
+		\vspace{2.0em}
+	\end{subfigure}
+	
+	\label{fig:trial2}
+\end{figure}
 
 
 
