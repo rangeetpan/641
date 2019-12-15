@@ -1,103 +1,44 @@
-\section{Results}
+\section{Evaluation}
 \label{sec:evaluation}
-\subsection{Experimental Setup}
-%\subsubsection{\textbf{6.1.1~~Model Mining}}
-%\begin{figure}
-%	\includegraphics[width=0.8\linewidth]{mlp}
-%	\centering
-%	\caption{MLP Structure}
-%	\label{fig:mlp}
-%	%\vspace{15pt}
-%\end{figure}
-%We have mined {\bf x} multilayer perceptron (MLP) models from several \emph{Keras} GitHub repositories. However, there are many different kinds of machine learning models in those repositories. To identify the MLP model, the general structure of MLP is required to be investigated. Then, we filter the models which do not belong to that structure.  A general structure of MLP is depicted in Figure \figref{fig:mlp}. There are three components in the MLP structure e.g., the input layer, hidden layer, and the output layer. Moreover, all of these layers are constructed using the Dense layer and activation layer. Therefore, if a mined model has another kind of layers like a convolutional layer or recurrent layer, it will be discarded. To detect and extract MLP, we have used the control flow graph (CFG). In particular, we manually collect a list of \emph{Keras} APIs used to build Keras models. Then, the CFG parses through each statement of the Python files and collect the API names. If the API names belong to the APIs list, we will collect them. After that, we connect all the API calls to acquire a complete model. If a model contains at least one API which is not used for constructing MLP, we will remove it. Moreover, we also filter the MLP models which miss some requirement information like input shape or output channel.
-%\begin{figure}
-%	\vspace{-15pt}
-%	\centering
-%	\begin{subfigure}[b]{.45\linewidth}
-%		\begin{lstlisting}[basicstyle=\footnotesize,numberblanklines=false]
-%		model.add(Dense(units=64, activation='relu', input_dim=100)) 
-%		model.add(Dense(units=10, activation='softmax'))\end{lstlisting}
-%		\caption{Original MLP}
-%		\label{fig:originalCNN}
-%	\end{subfigure}
-%	\begin{subfigure}[b]{.52\linewidth}
-%		\begin{lstlisting}[basicstyle=\footnotesize,numberblanklines=false]	
-%		{'func': 'Dense', 'input_dim':100, 'units': 64} 
-%		{'func': 'relu'}
-%		{'func': 'Dense', 'units': 64}
-%		{'func': 'softmax'}\end{lstlisting}
-%		\caption{ANN}
-%		\label{fig:convertedCNN}
-%	\end{subfigure}
-%	\caption{Example of an original MLP and ANN}
-%	\label{fig:converted}
-%\end{figure}
-%\begin{algorithm}
-%	\caption{Model Mining}\label{euclid}
-%	\begin{algorithmic}[1]
-%		\Procedure{model\_extraction}{pyFiles}
-%		\State $\textit{CFG} \gets \text{py}$
-%		\State \Return MLP
-%		\EndProcedure
-%		\Procedure{model\_filtering}{pyFiles}
-%		\State $\textit{check = True} $
-%		\For{$py$ $\in$ $pyFiles$}
-%		\State $\textit{check = True} $
-%		\State $model$ = $model\_extraction(py)$ 
-%		\For{$layer$ $\in$ $model$}
-%		\If {$layer$ $is$ $False$} 
-%		\State $\textit{check = False} $
-%		\State {\bf break}
-%		\EndIf
-%		\EndFor
-%		\If {$check$ $=$ $True$} 
-%		\State $\textit{ANN}  \gets \text{model}$
-%		\EndIf
-%		\EndFor
-%		
-%		\EndProcedure	
-%	\end{algorithmic}
-%\end{algorithm}
-%
-%
-%
-%For the convenience of using the mined models, we have stored them in the form of an abstract neural network (ANN). Figure \ref{fig:converted} shows the example of an original MLP and ANN. ANN is a graph in which nodes represent for model layers and edges represent the order of the layers. For example, the first line is the Dense layer which includes three information which are 100 input channels, 64 output channels, and Relu activation layer. Thus, we separate this layer in two layers i.e., the Dense layer and activation layer.
-
 In this section, we discuss the result and the experiments computed to evaluate our proposed approach.
-\paragraph{\textbf{RQ1: What is the value of $\delta$?}}
-We plan to empirically evaluate the value of the $\delta$ using the mined models. Here, we have mined models from a specific set of problems that deal with the image classification. We evaluate our computation metric i.e., recall, precision, and F-score for different values of $\delta$ and chose the value that provides the nearest optimum solution.
-\paragraph{\textbf{RQ2: How efficient is this approach?}}
-We can compute the precision, recall, and F-score using all the models with a different value of the user-provided value in our specification language and evaluate the performance.
-\paragraph{\textbf{RQ3: How effective is this approach?}}
-We plan to measure the execution time for each iteration of evaluation and report the time needed to find the optimum solution for different $\delta$ and report the same.
+\subsection{Experimental Setup}
+For evaluating our approach, we have chose two different datasets
+
+\textbf{MNIST:}
+This dataset constitutes of different images of handwritten digits. It has 10 different sets of images, each representing a single digit. The training dataset contains 60,000 images and the testing dataset has 10,000 images. However, we have utilized the training dataset for the evaluation of our proposed approach. Furthermore, to observe the effect of our proposed approach, we have built 3 handmade models, 1) MNIST-1: This model has been built with one hidden layer with 256 neurons and the training accuracy of this model ~88.6\%, 2) MNIST-2: For this model, we have chosen two hidden layers with 256 neurons and the accuracy is ~88.5\%, and 3) MNIST-4: This model possesses 4 hidden layers with the same number of neurons and the accuracy is 87.2\%.
+
+\textbf{Fashion MNIST:}
+This dataset is structurally equivalent to the MNIST but this dataset is built with different sets of clothes. Similar to the MNIST dataset, we have built 3 handmade models for the experimental purpose that we have denoted as FMNIST-1, FMNIST-2, and FMNIST-4, whose accuracies are ~81.5\%, ~81.6\%, and ~80.2\% respectively.
+\subsection{Results}
+\subsubsection{\textbf{RQ1: What is the value of $\delta$?}}
 \begin{figure}
 	\begin{subfigure}[b]{.46\linewidth}{}
 		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/MNIST_Delta}
 		\centering
 		\caption{MNIST}
-		\vspace{2.0em}
+		%    \vspace{2.0em}
 	\end{subfigure}
 	\begin{subfigure}[b]{.46\linewidth}
 		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/FMNIST_Delta}
 		\caption{F-MNIST}
-		\vspace{2.0em}
+		%    \vspace{2.0em}
 	\end{subfigure}
-	
+	\caption{Experiment with varying $\delta$ and observe the gain of accuracy}
 	\label{fig:delta}
 \end{figure}
+In our approach to identifying the optimum solution for the weight and bias discussed in Algorithm \ref{algo:asa}, the step size $\delta$ has not been decided. Instead of varying the $\delta$ while finding the appropriate value for weight and bias, we empirically evaluated our approach with different values of $\delta$ and identified the most suitable value. In this experiment, we have performed the 50 iterations for each choice of $\delta$ and pick the best gain to report in Figure \ref{fig:delta}. Also, to perform this experiment, we have not restricted our algorithm with a specific time and any desired gain. In Figure \ref{fig:delta}, we varied the value of $\delta$ from 0.002 to 0.0065 and observed the gain of accuracy. We performed this experiment for both MNIST and F-MNIST for all three different types of the model discussed before. We have denoted the highest gain for each model and dataset combination by an upward triangle. Our result suggests that five out of six evaluation conditions with $\delta$=0.0025 and $\delta$=0.003, the most gain has been achieved. For further evaluation, we have fixed the choice of the $\delta$ to either 0.0025 or 0.003.
+\subsubsection{\textbf{RQ2: How effective is this approach?}}
 \begin{figure}
 	\begin{subfigure}[b]{.46\linewidth}{}
 		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/MNIST_25}
 		\centering
 		\caption{MNIST}
-		\vspace{2.0em}
 	\end{subfigure}
 	\begin{subfigure}[b]{.46\linewidth}
 		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/FMNIST_25}
 		\caption{F-MNIST}
-		\vspace{2.0em}
 	\end{subfigure}
-	
+	\caption{Trial with $\delta$=0.0025}
 	\label{fig:trial1}
 \end{figure}
 \begin{figure}
@@ -105,16 +46,20 @@ We plan to measure the execution time for each iteration of evaluation and repor
 		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/MNIST_3}
 		\centering
 		\caption{MNIST}
-		\vspace{2.0em}
+		%\vspace{2.0em}
 	\end{subfigure}
 	\begin{subfigure}[b]{.46\linewidth}
 		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/FMNIST_3}
 		\caption{F-MNIST}
-		\vspace{2.0em}
+		%\vspace{2.0em}
 	\end{subfigure}
-	
+	\caption{Trial with $\delta$=0.003}
 	\label{fig:trial2}
 \end{figure}
+To identify the gain achieved by our approach, we can utilize the same experimental setup discussed in the prior research question. We have found that our approach can increase the accuracy by 0.04\%, 4.02\%, and 3.17\% for MNIST dataset with model MNIST-1, MNIST-2, and MNIST-4 respectively. Whereas, for the F-MNIST dataset, our maximum gain achieved is 2.56\%, 3.55\%, and 3.33\% for FMNIST-1, FMNIST-2, and FMNIST-4 respectively. However, our approach takes a significant amount of time to identify the solution as for each $\delta$ value we have iterated our solution findings approach for 50 iterations that is equivalent to training the model 50 times. We have performed another set of experiments with the $\delta$ value found in our previous experiments. The primary reason to perform these new sets of the experiment to identify a set of values for iteration for which our approach performs best that can be helpful for end-users to restrict their choices. In the Figure \ref{fig:trial1}, we have performed the evaluation with the $\delta$=0.0025 and similarly, in Figure \ref{fig:trial2}, we have performed the experiments with $\delta$=0.003. We have evaluated all 6 combinations of models with 2 datasets. For each combination of model and dataset, we have denoted the maximum gain of accuracy by an upward triangle in the plots. From the experimental evaluation, we have found that there is no particular trend that the algorithm followed that can be used to restrict the value of the trials. The maximum gain of accuracy is almost distributed all over the places and with this message, we have not restricted our algorithm with any prior choice of the value for a number of allowable trials.
+
+\subsubsection{\textbf{RQ3: How efficient is this approach?}}
+We plan to measure the execution time for each iteration of evaluation and report the time needed to find the optimum solution for different $\delta$ and report the same.
 
 
 
