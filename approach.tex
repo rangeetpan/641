@@ -102,8 +102,6 @@ In this approach, we have explained how an accountable DNN accuracy can be obtai
 \end{itemize}
 \begin{algorithm}
 	\footnotesize
-	\caption{\footnotesize ADNN}
-	\label{algo:util}
 	\begin{algorithmic}[1]
 		\State $dataset,batch\_size, learning\_rate, training\_epoch$=user's choice of problem
 		\State $count\_hidden=i$
@@ -115,7 +113,7 @@ In this approach, we have explained how an accountable DNN accuracy can be obtai
 		\Procedure{$adnn\_train(max\_time, max\_trial, max\_gain$)}{}
 		\State	$(x\_train, y\_train)=dataset.load()$
 		\State $current\_time=now()$
-		\State $\delta=[0.0025, 0.003]$
+		\State $\delta=$ Empirically chosen value(s)
 		\For {each $\delta_k$ in $\delta$}
 		\State $loss, accuracy\_old=train(init\_weight,init\_bias,$
 					\myindent{0.88}$dataset,batch\_size, learning\_rate, training\_epoch)$
@@ -133,7 +131,10 @@ In this approach, we have explained how an accountable DNN accuracy can be obtai
 		\State \Return $accuracy\_old+gain$
 		\EndProcedure
 	\end{algorithmic} 
+	\caption{\footnotesize ADNN}
+	\label{algo:adnn}
 \end{algorithm}
+In the Algorithm \ref{algo:adnn}, we have utilized the users' intent and have discussed the methodology to perform the searching operation that could be beneficial to increase the accuracy. We have taken the value of the dataset, batch size, learning rate, and epoch parameters from the users as it varies from the choice of the problem and domain. As our proposed approach is currently able to support dense layers, we have taken the number of hidden dense layers present in the model architecture from the users. We have initialized the weight and bias from a random function and the size of the weight and bias is dependent on the size of the hidden layers that users provide. We have denoted the initial starting point of the weight and bias as $init\_weight$ and $init\_bias$ and there will be $i$ number of different weight and bias present, where $i$ denotes the number of allowable hidden layers needed to build the architecture of the model. Then, we have trained the model based on the architecture and the dataset provided. We have not shown the algorithm for the training as we have utilized the MLP implementation of the model building based on \emph{Tensorflow} and in the \emph{Tensorflow} model can be built by providing the weight and bias from the scratch and does not need additional coding to perform a model into its imperative one. Once we have trained the initial model, we have stored the loss and the accuracy of the starting model and have started the searching process. Our searching process is based on the user's intent of the previously defined three parameters i.e., $max\_time$, $max\_trial$, and $max\_gain$. if one of the three conditions does not meet, we have stopped the searching process. During the searching, we have increased the weight and bias value based on the $\delta_k$, where $k$ can be drawn from a set of real numbers that have been chosen based on the empirical evaluation discussed in \S\ref{subsec:result}. We have trained the model with the new sets of weight and bias and store the new accuracy and loss values. We keep on doing the operations until any of the user-provided conditions are met. In the proposed approach, we have defined a metric to measure the increase of the accuracy in each that is defined as \emph{gain}. We have defined \emph{gain} as $gain=accuracy_{T}-accuracy_{M}$, where $accuracy_{T}$ and $accuracy_{M}$ represents as the accuracy of the model after a single trial and accuracy of the model at the start respectively. Once, the algorithm stops, our proposed approach reports the highest gain and the corresponding model to the users.
 %\subsection{Assertion of DNN Accuracy}
 %This approach includes the validation framework from the learned distribution. We have proposed an assertion mechanism that verify that whether a DNN model can achieve the expected accuracy or not. We propose \emph{ADNN}, a specification language that restricts the learning process from a pair $(f,\nu)$, where $f$ and $\nu$ denotes the learning process and the specification provided by the user. An example of the programming language is depicted as below.
 %\begin{lstlisting}[language=Python, caption=Example of specification language]

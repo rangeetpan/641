@@ -10,6 +10,7 @@ This dataset \cite{lecun1998gradient} constitutes of different images of handwri
 \textbf{Fashion MNIST:}
 This dataset \cite{xiao2017fashion} is structurally equivalent to the MNIST but this dataset is built with different sets of clothes. Similar to the MNIST dataset, we have built 3 handmade models for the experimental purpose that we have denoted as FMNIST-1, FMNIST-2, and FMNIST-4, whose accuracies are ~81.5\%, ~81.6\%, and ~80.2\% respectively.
 \subsection{Results}
+\label{subsec:result}
 \subsubsection{\textbf{RQ1: What is the value of $\delta$?}}
 \begin{figure}
 	\begin{subfigure}[b]{.46\linewidth}{}
@@ -27,7 +28,7 @@ This dataset \cite{xiao2017fashion} is structurally equivalent to the MNIST but 
 	\label{fig:delta}
 \end{figure}
 In our approach to identifying the optimum solution for the weight and bias discussed in
-Algorithm \ref{algo:asa}, the step size $\delta$ has not been decided. Instead of varying the $\delta$ while finding the appropriate value for weight and bias, we empirically evaluated our approach with different values of $\delta$ and identified the most suitable value. In this experiment, we have performed the 50 iterations for each choice of $\delta$ and pick the best gain to report in Figure \ref{fig:delta}. Also, to perform this experiment, we have not restricted our algorithm with a specific time and any desired gain. In Figure \ref{fig:delta}, we varied the value of $\delta$ from 0.002 to 0.0065 and observed the gain of accuracy. We performed this experiment for both MNIST and F-MNIST for all three different types of the model discussed before. We have denoted the highest gain for each model and dataset combination by an upward triangle. Our result suggests that five out of six evaluation conditions with $\delta$=0.0025 and $\delta$=0.003, the most gain has been achieved. For further evaluation, we have fixed the choice of the $\delta$ to either 0.0025 or 0.003.
+Algorithm \ref{algo:adnn}, the step size $\delta$ has not been decided. Instead of varying the $\delta$ while finding the appropriate value for weight and bias, we empirically evaluated our approach with different values of $\delta$ and identified the most suitable value. In this experiment, we have performed the 50 iterations for each choice of $\delta$ and pick the best gain to report in Figure \ref{fig:delta}. Also, to perform this experiment, we have not restricted our algorithm with a specific time and any desired gain. In Figure \ref{fig:delta}, we varied the value of $\delta$ from 0.002 to 0.0065 and observed the gain of accuracy. We performed this experiment for both MNIST and F-MNIST for all three different types of the model discussed before. We have denoted the highest gain for each model and dataset combination by an upward triangle. Our result suggests that five out of six evaluation conditions with $\delta$=0.0025 and $\delta$=0.003, the most gain has been achieved. For further evaluation, we have fixed the choice of the $\delta$ to either 0.0025 or 0.003.
 \subsubsection{\textbf{RQ2: How effective is this approach?}}
 \begin{figure}
 	\begin{subfigure}[b]{.46\linewidth}{}
