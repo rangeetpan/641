@@ -23,8 +23,8 @@ class Util:
 
     def softmax(self, x):
         """Compute softmax values for each sets of scores in x."""
-        e_x = np.exp(x - np.max(x))
-        return e_x / e_x.sum(axis=0)  # only difference
+        e_x = np.exp(x)
+        return e_x / e_x.sum(axis=1, keepdims=True)  # only difference
 
     def forwardPropagation(self, inputs, label):
         """ Inputs are taken as the 1D array and so as the label"""
@@ -38,7 +38,7 @@ class Util:
         node_output = exp_node_output / np.sum(exp_node_output, axis=1, keepdims=True)
         #print(node_output)
         #node_output = self.softmax(node_output)
-        loss = np.sum(-np.log(node_output[range(inputs.shape[0]),label]))/(inputs.shape[0])+0.44 * self.regularizer*np.sum(self.input_W *self.input_W)+0.44 * self.regularizer*np.sum(self.hidden_W *self.hidden_W)
+        loss = np.sum(-np.log(node_output[range(inputs.shape[0]),label]))/(inputs.shape[0])+0.5 * self.regularizer*np.sum(self.input_W *self.input_W)+0.5 * self.regularizer*np.sum(self.hidden_W *self.hidden_W)
         """Loss= Input data loss + Loss correction by penalizing the loss, here we use 0.2 as an experimental value"""
         #loss = np.sum(-np.log(node_output[range(inputs.shape[0]), label])) / (inputs.shape[0]) + 0.2 * self.regularizer * np.sum(self.input_W ^ 2) + 0.2 * self.regularizer * np.sum(self.hidden_W ^ 2)
         return loss, node_hidden, node_output
