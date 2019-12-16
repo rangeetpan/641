@@ -61,9 +61,20 @@ Algorithm \ref{algo:adnn}, the step size $\delta$ has not been decided. Instead 
 To identify the gain achieved by our approach, we can utilize the same experimental setup discussed in the prior research question. We have found that our approach can increase the accuracy by 0.04\%, 4.02\%, and 3.17\% for MNIST dataset with model MNIST-1, MNIST-2, and MNIST-4 respectively. Whereas, for the F-MNIST dataset, our maximum gain achieved is 2.56\%, 3.55\%, and 3.33\% for FMNIST-1, FMNIST-2, and FMNIST-4 respectively. However, our approach takes a significant amount of time to identify the solution as for each $\delta$ value we have iterated our solution findings approach for 50 iterations that is equivalent to training the model 50 times. We have performed another set of experiments with the $\delta$ value found in our previous experiments. The primary reason to perform these new sets of the experiment to identify a set of values for iteration for which our approach performs best that can be helpful for end-users to restrict their choices. In the Figure \ref{fig:trial1}, we have performed the evaluation with the $\delta$=0.0025 and similarly, in Figure \ref{fig:trial2}, we have performed the experiments with $\delta$=0.003. We have evaluated all 6 combinations of models with 2 datasets. For each combination of model and dataset, we have denoted the maximum gain of accuracy by an upward triangle in the plots. From the experimental evaluation, we have found that there is no particular trend that the algorithm followed that can be used to restrict the value of the trials. The maximum gain of accuracy is almost distributed all over the places and with this message, we have not restricted our algorithm with any prior choice of the value for a number of allowable trials.
 
 \subsubsection{\textbf{RQ3: How efficient is this approach?}}
-We plan to measure the execution time for each iteration of evaluation and report the time needed to find the optimum solution for different $\delta$ and report the same.
+In order to validate the time taken by our proposed approach and provide users an insight into the preferable choice to the value of the $max\_time$, we have conducted an experiment depicted in Figure \ref{fig:time}. 
+\begin{figure}
+	\begin{subfigure}[b]{.46\linewidth}{}
+		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/MNIST_time}
+		\centering
+		\caption{MNIST}
+	\end{subfigure}
+	\begin{subfigure}[b]{.46\linewidth}
+		\includegraphics[keepaspectratio = True, scale = 0.31]{figures/FMNIST_time}
+		\caption{F-MNIST}
+	\end{subfigure}
+	\caption{Experiment with varying time with $\delta$=[0.0025,0.003]}
+	\label{fig:time}
+\end{figure}
 
-
-
-
+In this experiment, we have executed our proposed approach for one hour for each model and dataset combinations and report the maximum gain of accuracy over every 10 minutes. The primary reason behind this is to find an empirical value of the time that a user can utilize to restrict the algorithm to run for a long time. From Figure \ref{fig:time}, we have found that though the maximum gain achieved is not same as if the proposed approach has been run for more time as we did in the Figure \ref{fig:trial1} and \ref{fig:trial2}, the maximum gain can be achieved within 40min for $\sim$66\% of the time (4 cases of out 6 configurations). 
 
