@@ -110,7 +110,9 @@ In this approach, we have explained how an accountable DNN accuracy can be obtai
 		\State $init\_weight=[random()_1,...,random()_i]$
 		\State $init\_bias=[random()_1,...,random()_i]$
 		\State $accuracy\_list=[]$
-		\State $trial,gain,time\_diff=0$
+		\State $trial,gain,time\_diff=0$\\
+		\algorithmicrequire $max\_time, max\_trial, max\_gain$ \newline 
+		\algorithmicensure Accuracy of the Model when one of the three constraints fails
 		\Procedure{$adnn\_train(max\_time, max\_trial, max\_gain$)}{}
 		\State	$(x\_train, y\_train)=dataset.load()$
 		\State $current\_time=now()$
