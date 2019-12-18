@@ -17,11 +17,15 @@ In another study \cite{du2018towards}, the authors proposed an explainable DNN m
 
 Zhang et al. \cite{zhang2018interpretable} proposed an alternate convolutional neural network (CNN) based models that hold more information than the traditional ones which makes the CNN model more accountable to the classification accuracy even though in some cases, accuracy may decline. So, accuracy validation is crucial while making an interpretable CNN model.
 
-\subsection{Accountability}
+\subsection{Accountability of the DNN Model}
 According to the study \cite{veale2018fairness}, accountability in decision making represents the explanation about the "ongoing strategy". From the \S\ref{sec:motivation}, we have found that a single model structure can provide different decision-making capabilities due to the assertion of the probabilistic distribution in the initialization process. Our preliminary evidence has shown that a DNN model can end up achieving different accuracy in a different setting. A simple question can be asked? How can we really say that a DNN model performs what it advertises? Is there a reliable solution that does not change with the settings?
 To answer these questions and holding the DNN model accountable in terms of the reported accuracy, we propose an approach named ADNN or accountable DNN.
 
 \subsection{Hyper-parameter Optimization}
+Zhao\etal \cite{zhao2017towards} proposed a technique for improving accuracy in iris recognition utilizing the features associated with the spatial context. In that research study, they have experimented with tuning the hyperparameters in such a way that produces the maximum performance. However, our proposed work is different in this context, we are not considering the hyperparameter tuning to generate the near-optimal accuracy rather we have focused on the user-intent based searching capability by restricting in terms of maximum time, trial, and gain for best possible modification in weight and bias initialization.
+
+Prior work \cite{bergstra2011algorithms} has demonstrated that hyper-parameter optimization utilizing the random search is enough for accurately learning deep neural networks with various datasets. However the intuition for improving the searching capability there is no such closely related work in terms of confining the searching process to user-provided maximum allowable time, trial and accuracy gain to make a DNN model’s accuracy accountable.
+
 
 In our proposed approach, we learn how the initialization parameter varies the accuracy based on the manual study of the \emph{Keras} documentation. We have implemented a search and update based approach to modify the weight and bias. The process is restricted based on the users’ intent i.e., max time, gain, and trial.
 
